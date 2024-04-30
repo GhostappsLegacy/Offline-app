@@ -20,9 +20,74 @@
     </style>
     <link rel="manifest" href="manifest.json">
 </head>
-<body>
-    <h1>Welcome to the Offline Web App</h1>
-    <p>You can use this app even without an internet connection!</p>
+
+    <!-- Search Bar -->
+        <div class="relative mt-3 mx-5">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-search text-gray-400"></i>
+            </div>
+            <input type="text" name="search" id="search" placeholder="Search"
+                class="bg-gray-700 text-sm rounded-lg pl-10 p-2.5 w-full">
+        </div>
+        
+        <!-- Notification -->
+        <div class="m-5 text-center text-sm">
+            <p>Please <span class="text-red-500">Add a profile</span> and apply it first</p>
+            <p class="text-red-500">? How To Start?</p>
+        </div>
+        
+        <!-- Spacer -->
+        <div class="flex-grow"></div>
+        
+<style>
+
+  .bottom-navbar {
+    position: fixed;
+  padding: 0.75em 2em 0.75em 2em;
+  line-height: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(26, 26, 26, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+  }
+
+  .navbar-text {
+    color: #999898;
+    font-size: 12px; /* Adjusted font size */
+    margin-top: -16px; /* Reduced margin-top to bring text closer */
+    padding-bottom: 18px; /* Optional padding for better spacing */
+  }
+
+  .bottom-navbar svg {
+    height: 50px;
+    width: 50px;
+    fill: #999898;
+    margin-bottom: 0px; /* Removed additional margin */
+  }
+  
+  .bottom-navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0.5px;
+    background-color: rgba(113,113,113,0.5);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+
+</style>
+
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
@@ -34,5 +99,29 @@
             });
         }
     </script>
+
+<!-- Bottom Navigation Bar with updated styles -->
+<div class="fixed inset-x-0 bottom-0 bg-gray-900 bottom-navbar">
+  <div class="flex flex-col justify-center items-center p-4">
+    <!-- Home Icon SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" ...> ... </svg>
+    <!-- Text label for the icon -->
+    <span class="navbar-text">Home</span>
+  </div>
+</div>
+
+<div class="fixed inset-x-0 bottom-0 bg-gray-900 bottom-navbar">
+  <div class="flex flex-col justify-center items-center p-4">
+    <!-- Complete SVG code here -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125" xml:space="preserve">
+      <g>
+        </clipPath>
+        <path fill="#999898" clip-path="url(#a)" d="M76.958,46.427L53.001,25.548c-1.178-1.026-2.932-1.024-4.106,0.004L25.04,46.432   c-2.168,1.898-0.825,5.469,2.056,5.469c1.723,0,3.12,1.397,3.12,3.121v18.23c0,1.724,1.398,3.12,3.121,3.12h10.935V60.395   c0-0.975,0.789-1.764,1.763-1.764h9.933c0.974,0,1.764,0.789,1.764,1.764v15.978h10.385c1.724,0,3.121-1.396,3.121-3.12v-18.23   c0-1.724,1.397-3.121,3.12-3.121h0.55C77.792,51.9,79.133,48.322,76.958,46.427"/>
+    </g>
+    </svg>
+    <span class="navbar-text">Home</span>
+  </div>
+</div>
+
 </body>
 </html>
