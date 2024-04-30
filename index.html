@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff"/>
+    <title>Offline Web App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+    </style>
+    <link rel="manifest" href="data:application/manifest+json,{ 
+    'short_name': 'OfflineApp', 
+    'name': 'Offline Capable Web App', 
+    'icons': [{ 'src': 'icon-192x192.png', 'sizes': '192x192', 'type': 'image/png' }, 
+              { 'src': 'icon-256x256.png', 'sizes': '256x256', 'type': 'image/png' }],
+    'start_url': '.', 
+    'display': 'standalone', 
+    'background_color': '#FFFFFF', 
+    'theme_color': '#FFFFFF' }">
+</head>
+<body>
+    <h1>Welcome to the Offline Web App</h1>
+    <p>You can use this app even without an internet connection!</p>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('data:text/javascript, ' + encodeURIComponent(`
+                    const CACHE_NAME = 'v1';
+                    const urlsToCache = [
+                        '/',
+                        'index.html',
+                        'styles.css',
+                        'app.js',
+                        'icon-192x192.png',
+                        'icon-256x256.png'
+                    ];
+
+                    self.addEventListener('install', event => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then(cache => {
+                                    console.log('Opened cache');
+                                    return cache.addAll(urlsToCache);
+                                })
+                        );
+                    });
+
+                    self.addEventListener('fetch', event => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then(response => {
+                                    if (response) {
+                                        return response;
+                                    }
+                                    return fetch(event.request);
+                                }
+                            )
+                        );
+                    });
+                `)).then(function(registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                }, function(err) {
+                    console.log('Service Worker registration failed:', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
