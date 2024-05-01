@@ -3,125 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ffffff"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Offline Web App">
-    <title>Offline Web App</title>
+    <title>Channel List</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            text-align: center;
+            background-color: black; 
+            color: white;
+            font-family: sans-serif; 
+            margin: 0; 
+            padding: 0;
+            box-sizing: border-box;
         }
-        h1 {
-            color: #333;
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .h-screen { height: 100vh; }
+        .p-5 { padding: 1.25rem; }
+        .mx-5 { margin-left: 1.25rem; margin-right: 1.25rem; }
+        .mt-3 { margin-top: 0.75rem; }
+        .border-b { border-bottom: 1px solid #4b5563; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .text-lg { font-size: 1.125rem; }
+        .font-bold { font-weight: bold; }
+        .text-sm { font-size: 0.875rem; }
+        .text-center { text-align: center; }
+        .bg-gray-700 { background-color: #374151; }
+        .bg-gray-900 { background-color: #1f2937; }
+        .text-gray-400 { color: #9ca3af; }
+        .text-red-500 { color: #ef4444; }
+        .justify-between { justify-content: space-between; }
+        .items-center { align-items: center; }
+        .pl-3 { padding-left: 0.75rem; }
+        .pl-10 { padding-left: 2.5rem; }
+        .p-2.5 { padding: 0.625rem; }
+        .w-full { width: 100%; }
+        .fixed { position: fixed; width: 100%; }
+        .inset-x-0 { left: 0; right: 0; }
+        .bottom-0 { bottom: 0; }
+        .relative { position: relative; }
+
+        /* Bottom Navigation Bar with SVG and Text */
+        .bottom-navbar {
+            position: fixed;
+            padding: 0.75em 2em 0.75em 2em;
+            line-height: 1;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(26, 26, 26, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+        }
+
+        .navbar-text {
+            color: #999898;
+            font-size: 12px; /* Adjusted font size */
+            margin-top: -16px; /* Reduced margin-top to bring text closer */
+            padding-bottom: 18px; /* Optional padding for better spacing */
         }
     </style>
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="data:application/manifest+json,{ 'name': 'Channel List', 'short_name': 'ChannelList', 'start_url': '.', 'display': 'standalone', 'background_color': '#000000', 'description': 'Access your favorite channels quickly.', 'icons': [{ 'src': 'icons/icon-192x192.png', 'sizes': '192x192', 'type': 'image/png' }, { 'src': 'icons/icon-256x256.png', 'sizes': '256x256', 'type': 'image/png' }, { 'src': 'icons/icon-384x384.png', 'sizes': '384x384', 'type': 'image/png' }, { 'src': 'icons/icon-512x512.png', 'sizes': '512x512', 'type': 'image/png' }] }">
 </head>
-
-    <!-- Search Bar -->
-        <div class="relative mt-3 mx-5">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <i class="fas fa-search text-gray-400"></i>
-            </div>
-            <input type="text" name="search" id="search" placeholder="Search"
-                class="bg-gray-700 text-sm rounded-lg pl-10 p-2.5 w-full">
+<body>
+    <div class="flex flex-col h-screen">
+        <!-- Header -->
+        <div class="p-5 flex items-center justify-between border-b border-gray-800">
+            <i class="fas fa-bars text-red-500"></i>
+            <h1 class="text-lg font-bold">Channel List</h1>
+            <i class="fas fa-cog text-red-500"></i>
         </div>
-        
-        <!-- Notification -->
-        <div class="m-5 text-center text-sm">
-            <p>Please <span class="text-red-500">Add a profile</span> and apply it first</p>
-            <p class="text-red-500">? How To Start?</p>
-        </div>
-        
-        <!-- Spacer -->
-        <div class="flex-grow"></div>
-        
-<style>
+       
+        <!-- Search Bar —>
 
-  .bottom-navbar {
-    position: fixed;
-  padding: 0.75em 2em 0.75em 2em;
-  line-height: 1;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(26, 26, 26, 0.5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 60px;
-  }
+    <!-- Notification -->
+    <div class="m-5 text-center text-sm">
+        <p>Please <span class="text-red-500">Add a profile</span> and apply it first</p>
+        <p class="text-red-500">? How To Start?</p>
+    </div>
+    
+    <!-- Spacer -->
+    <div class="flex-grow"></div>
+    
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-navbar">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+            <path d="M3 9l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span class="navbar-text">Home</span>
+    </div>
+</div>
 
-  .navbar-text {
-    color: #999898;
-    font-size: 12px; /* Adjusted font size */
-    margin-top: -16px; /* Reduced margin-top to bring text closer */
-    padding-bottom: 18px; /* Optional padding for better spacing */
-  }
+<!-- Inline JavaScript for Font Awesome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 
-  .bottom-navbar svg {
-    height: 50px;
-    width: 50px;
-    fill: #999898;
-    margin-bottom: 0px; /* Removed additional margin */
-  }
-  
-  .bottom-navbar::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 0.5px;
-    background-color: rgba(113,113,113,0.5);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-
-
-</style>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                }, function(err) {
-                    console.log('Service Worker registration failed:', err);
-                });
+<!-- Service Worker (inline attempt is not possible; this should be a separate file) -->
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+                console.log('ServiceWorker registration failed: ', err);
             });
-        }
-    </script>
-
-<!-- Bottom Navigation Bar with updated styles -->
-<div class="fixed inset-x-0 bottom-0 bg-gray-900 bottom-navbar">
-  <div class="flex flex-col justify-center items-center p-4">
-    <!-- Home Icon SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" ...> ... </svg>
-    <!-- Text label for the icon -->
-    <span class="navbar-text">Home</span>
-  </div>
-</div>
-
-<div class="fixed inset-x-0 bottom-0 bg-gray-900 bottom-navbar">
-  <div class="flex flex-col justify-center items-center p-4">
-    <!-- Complete SVG code here -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 125" xml:space="preserve">
-      <g>
-        </clipPath>
-        <path fill="#999898" clip-path="url(#a)" d="M76.958,46.427L53.001,25.548c-1.178-1.026-2.932-1.024-4.106,0.004L25.04,46.432   c-2.168,1.898-0.825,5.469,2.056,5.469c1.723,0,3.12,1.397,3.12,3.121v18.23c0,1.724,1.398,3.12,3.121,3.12h10.935V60.395   c0-0.975,0.789-1.764,1.763-1.764h9.933c0.974,0,1.764,0.789,1.764,1.764v15.978h10.385c1.724,0,3.121-1.396,3.121-3.12v-18.23   c0-1.724,1.397-3.121,3.12-3.121h0.55C77.792,51.9,79.133,48.322,76.958,46.427"/>
-    </g>
-    </svg>
-    <span class="navbar-text">Home</span>
-  </div>
-</div>
+        });
+    }
+</script>
 
 </body>
 </html>
